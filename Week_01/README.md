@@ -1,10 +1,12 @@
 学习笔记
 1. python xrange()函数
+
 xrange()函数用法与range()完全相同，所不同的是生成的不是一个数组，而是一个生成器。
 python3 取消了 xrange() 函数，并且和 range() 函数合并为 range()。
 当调用 xrange() 的时候，python3 环境提示 xrange 没有被定义。
 
 2. Java queue
+
 Java queue遵循FIFO顺序来插入和删除它的元素；
 最常用的queue实现是LinkedList，ArrayBlockingQueue 和PriorityQueue；
 
@@ -21,9 +23,13 @@ E element()：检索但不删除此队列的头部。 此方法与peek的不同�
 E peek()：检索但不移除此队列的头部，如果此队列为空，则返回null。
 
 
-3. Java PriorityQueue源码  参考链接：https://blog.csdn.net/qq_41907991/article/details/95666271?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522161200315416780261976247%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.%2522%257D&request_id=161200315416780261976247&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_v2~rank_v29-1-95666271.pc_search_result_no_baidu_js&utm_term=java+Queue+和+Priority+Queue+源码分析&spm=1018.2226.3001.4187
+3. Java PriorityQueue源码
+
+参考链接：https://blog.csdn.net/qq_41907991/article/details/95666271?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522161200315416780261976247%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.%2522%257D&request_id=161200315416780261976247&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_v2~rank_v29-1-95666271.pc_search_result_no_baidu_js&utm_term=java+Queue+和+Priority+Queue+源码分析&spm=1018.2226.3001.4187
+
 PriorityQueue是Queue的一个继承者，相比于一般的列表，它的特点是出队的时候可以按照优先级进行出队，所以不像LinkedList那样只能按照插入的顺序出队，PriorityQueue是可以根据给定的优先级顺序进行出队的。这里说的给定优先级顺序既可以是内部比较器，也可以是外部比较器。PriorityQueue内部是根据小顶堆的结构进行存储的，所谓小顶堆的意思，便是最小的元素总是在最上面，每次出队总是将堆顶元素移除，这样便能让出队变得有序。
-    
+
+
 
 内部成员：内部使用的是一个Object数组进行元素的存储。
 
@@ -134,6 +140,7 @@ PriorityQueue是Queue的一个继承者，相比于一般的列表，它的特�
 
 
 从集合中构造优先级队列的时候，调用了几个初始化函数
+
     private void initFromPriorityQueue(PriorityQueue<? extends E> c) {
         if (c.getClass() == PriorityQueue.class) {
             this.queue = c.toArray();
@@ -161,6 +168,7 @@ PriorityQueue是Queue的一个继承者，相比于一般的列表，它的特�
         initElementsFromCollection(c);
         heapify();
     }
+
 initFromPriorityQueue即从另外一个优先级队列构造一个新的优先级队列，此时内部的数组元素不需要进行调整，只需要将原数组元素都复制过来即可。但是从其他非PriorityQueue的集合中构造优先级队列时，需要先将元素复制过来后再进行调整，此时调用的是heapify方法：
 
 
@@ -169,7 +177,6 @@ initFromPriorityQueue即从另外一个优先级队列构造一个新的优先�
         for (int i = (size >>> 1) - 1; i >= 0; i--)
             siftDown(i, (E) queue[i]);
     }
-
     // 划重点了，这个函数即对应上面的元素删除时从上往下调整的步骤
     private void siftDown(int k, E x) {
         if (comparator != null)
@@ -222,6 +229,7 @@ initFromPriorityQueue即从另外一个优先级队列构造一个新的优先�
     }
 
 //siftUp()函数
+
  private void siftUp(int k, E x) {
         if (comparator != null)
             siftUpUsingComparator(k, x);
@@ -262,7 +270,6 @@ initFromPriorityQueue即从另外一个优先级队列构造一个新的优先�
 public boolean add(E e) {
         return offer(e);
     }
-
     public boolean offer(E e) {
         if (e == null)
             throw new NullPointerException();
