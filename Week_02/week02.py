@@ -74,6 +74,47 @@ class Solution:
 
 5. N叉树的层序遍历
 
+"""
+# Definition for a Node.
+class Node:
+    def __init__(self, val=None, children=None):
+        self.val = val
+        self.children = children
+"""
+
+class Solution:
+    def levelOrder(self, root: 'Node') -> List[List[int]]:
+        if not root: return []
+        res = []
+
+        def bfs(root):
+            queue = [root]
+            while queue:
+                nxt = []
+                tmp = []
+                for node in queue:
+                    tmp.append(node.val)
+                    for ch in node.children:
+                        nxt.append(ch)
+                res.append(tmp)
+                queue = nxt
+
+        bfs(root)
+        return res
+
 6. 前K个高频元素
 
-
+class Solution:
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+        #用堆来实现
+        #Counter目的是用来跟踪值出现的次数。它是一个无序的容器类型，以字典的键值对形式存储，其中元素作为key，其计数作为value。
+        dic = Counter(nums)
+        queue, res = [], []
+        # i 为元素值，dic[i]为值的个数
+        for i in dic:
+            #创建大顶堆
+            heapq.heappush(queue, (-dic[i], i))
+        for i in range(k):
+            tmp = heapq.heappop(queue)
+            res.append(tmp[1])
+        return res
