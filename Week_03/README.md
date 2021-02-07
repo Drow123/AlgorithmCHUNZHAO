@@ -7,96 +7,96 @@
 二叉树
 
 
-  def dfs(node):
+    def dfs(node):
 
-    if node in visited:
-        #already visited
-        return 
+        if node in visited:
+            #already visited
+            return 
      
-    visited.add(node):
+        visited.add(node):
     
-    #process current node
-    #... #logic here
-    dfs(node.left)
-    dfs(node.right)
+        #process current node
+        #... #logic here
+        dfs(node.left)
+        dfs(node.right)
 
 多叉树
 
-  visited = set()
+    visited = set()
 
-  def dfs(node, visited):
+    def dfs(node, visited):
 
-    visited.add(node)
+        visited.add(node)
 
-    #process current node here.
-    ... 
-    for next_node in node.children():
-        if not next_node in visited:
-            dfs(next_node, visited)
+        #process current node here.
+        ... 
+        for next_node in node.children():
+            if not next_node in visited:
+                dfs(next_node, visited)
 
 
 DFS代码-递归写法
 
 
-  visited = set()
-  def dfs(node, visited):
-    if node in visited: #terminator
-    #already visited
-        return 
+    visited = set()
+    def dfs(node, visited):
+        if node in visited: #terminator
+        #already visited
+            return 
      
-    visited.add(node)
+        visited.add(node)
 
-    #process current node here.
-    ...
-    for next_node in node.children():
-        if not next_node in visited:
-            dfs(next_node, visited)
+        #process current node here.
+        ...
+        for next_node in node.children():
+            if not next_node in visited:
+                dfs(next_node, visited)
 
 DFS代码-非递归（手动维护一个栈）
 
-  def DFS(self, tree):
-    if tree.root is None:
-        return []
-    visited, stack = [], [tree.root]
-    while stack:
-        node = stack.pop()
-        visited.add(node)
+    def DFS(self, tree):
+        if tree.root is None:
+            return []
+        visited, stack = [], [tree.root]
+    	while stack:
+            node = stack.pop()
+            visited.add(node)
         
-        process(node)
-        node = generate_related_nodes(node)
-        stack.push(nodes)
+            process(node)
+            node = generate_related_nodes(node)
+            stack.push(nodes)
 
 2. 广度优先遍历（用队列）
 
-  def bfs(graph, start, end):
-    queue = []
-    queue.append([start])
-    visited.add(star)
+    def bfs(graph, start, end):
+        queue = []
+        queue.append([start])
+        visited.add(star)
    
-    while queue:
-        node = queue.popleft()
-        visited.add(node)
+        while queue:
+            node = queue.popleft()
+            visited.add(node)
 
-        process(node)
-        nodes = generate_related_nodes(node)
-        queue.push(nodes)
+            process(node)
+            nodes = generate_related_nodes(node)
+            queue.push(nodes)
 
 
 3. 通用递归模板
 
-  def recursion(level, param1, param2, ...)
-    #recursion terminator
-    if level > MAX_LEVEL:
-        process_result
-        return 
+    def recursion(level, param1, param2, ...)
+        #recursion terminator
+        if level > MAX_LEVEL:
+            process_result
+            return 
 
-    #process logic in current level
-    process(level, data...)
+        #process logic in current level
+        process(level, data...)
     
-    #drill down 
-    self.recursion(level + 1, p1, ...)
+        #drill down 
+        self.recursion(level + 1, p1, ...)
     
-    #reverse the current level status if needed
+        #reverse the current level status if needed
 
 4. 贪心算法
 
@@ -120,16 +120,16 @@ DFS代码-非递归（手动维护一个栈）
 
 二分模板（python）
 
-  left, right = 0, len(arry) - 1
-  while left <= right:
-    mid = (left + right) / 2
-    if array[mid] == target:
-        #find the target!!
-        break or return result
-    elif arr[mid] < target:
-        left = mid + 1
-    else:
-        right = mid -1  
+    left, right = 0, len(arry) - 1
+    while left <= right:
+        mid = (left + right) / 2
+        if array[mid] == target:
+            #find the target!!
+            break or return result
+        elif arr[mid] < target:
+            left = mid + 1
+        else:
+            right = mid -1  
 
 
 
