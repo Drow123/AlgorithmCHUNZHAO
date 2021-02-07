@@ -1,4 +1,4 @@
-1学习笔记
+学习笔记
 
 1. 深度优先搜索
 
@@ -6,7 +6,9 @@
 
 二叉树
 
-def dfs(node):
+
+  def dfs(node):
+
     if node in visited:
         #already visited
         return 
@@ -20,9 +22,10 @@ def dfs(node):
 
 多叉树
 
-visited = set()
+  visited = set()
 
-def dfs(node, visited):
+  def dfs(node, visited):
+
     visited.add(node)
 
     #process current node here.
@@ -34,9 +37,9 @@ def dfs(node, visited):
 
 DFS代码-递归写法
 
-visited = set()
 
-def dfs(node, visited):
+  visited = set()
+  def dfs(node, visited):
     if node in visited: #terminator
     #already visited
         return 
@@ -51,7 +54,7 @@ def dfs(node, visited):
 
 DFS代码-非递归（手动维护一个栈）
 
-def DFS(self, tree):
+  def DFS(self, tree):
     if tree.root is None:
         return []
     visited, stack = [], [tree.root]
@@ -65,7 +68,7 @@ def DFS(self, tree):
 
 2. 广度优先遍历（用队列）
 
-def bfs(graph, start, end):
+  def bfs(graph, start, end):
     queue = []
     queue.append([start])
     visited.add(star)
@@ -81,7 +84,7 @@ def bfs(graph, start, end):
 
 3. 通用递归模板
 
-def recursion(level, param1, param2, ...)
+  def recursion(level, param1, param2, ...)
     #recursion terminator
     if level > MAX_LEVEL:
         process_result
@@ -117,8 +120,8 @@ def recursion(level, param1, param2, ...)
 
 二分模板（python）
 
-left, right = 0, len(arry) - 1
-while left <= right:
+  left, right = 0, len(arry) - 1
+  while left <= right:
     mid = (left + right) / 2
     if array[mid] == target:
         #find the target!!
