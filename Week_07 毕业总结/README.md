@@ -160,36 +160,36 @@ Delete Max删除堆顶操作（O（logN））
         		return ans
 
 
-#滑动窗口
-#优先队列  #双端队列都可以做
-解题思路：
-1 python默认是小根堆，故加“-”，形成大根堆
-2 由于堆顶元素可能不在滑动窗口内，故要维护一个二元组（num， index）
-3 通过index判断堆顶元素是否在滑动窗口内
-4 首先把k个元素加入大根堆
-5 接着模拟滑动窗口右移，把最新的元素加入大根堆，维护堆顶元素
+	#滑动窗口
+	#优先队列  #双端队列都可以做
+	解题思路：
+	1 python默认是小根堆，故加“-”，形成大根堆
+	2 由于堆顶元素可能不在滑动窗口内，故要维护一个二元组（num， index）
+	3 通过index判断堆顶元素是否在滑动窗口内
+	4 首先把k个元素加入大根堆
+	5 接着模拟滑动窗口右移，把最新的元素加入大根堆，维护堆顶元素
 
-class Solution:
-    def maxSlidingWindow(self, nums: List[int], k: int) -> List[int]:
-        # 大根堆
-        n = len(nums)
-        # python默认是小根堆，故加"-"，形成"大根堆"
-        # 由于堆顶元素可能不在滑动窗口内，故要维护一个二元组(num, index)
-        # 通过index判断堆顶元素是否在滑动窗口内
-        # 首先把 k 个元素加入大根堆
-        q = [(-nums[i], i) for i in range(k)]
-        heapq.heapify(q)
+	class Solution:
+    		def maxSlidingWindow(self, nums: List[int], k: int) -> List[int]:
+        		# 大根堆
+        		n = len(nums)
+        		# python默认是小根堆，故加"-"，形成"大根堆"
+        		# 由于堆顶元素可能不在滑动窗口内，故要维护一个二元组(num, index)
+        		# 通过index判断堆顶元素是否在滑动窗口内
+        		# 首先把 k 个元素加入大根堆
+        		q = [(-nums[i], i) for i in range(k)]
+        		heapq.heapify(q)
 
-        ans = [-q[0][0]]
-        for i in range(k, n):
-            # 把最新的元素加入大根堆
-            heapq.heappush(q, (-nums[i], i))
-            # 判断堆顶元素（下标）是否在滑动窗口内
-            while q[0][1] <= i - k:
-                heapq.heappop(q)
-            # 把大根堆的堆顶元素加入ans
-            ans.append(-q[0][0])
-        return ans
+        		ans = [-q[0][0]]
+        		for i in range(k, n):
+            		# 把最新的元素加入大根堆
+            		heapq.heappush(q, (-nums[i], i))
+            		# 判断堆顶元素（下标）是否在滑动窗口内
+            		while q[0][1] <= i - k:
+                	heapq.heappop(q)
+           		# 把大根堆的堆顶元素加入ans
+            		ans.append(-q[0][0])
+        		return ans
 
 
 
@@ -255,23 +255,23 @@ pow(x, n):
 
 
 
-class Solution:
-    def myPow(self, x: float, n: int) -> float:
-        #分治，其实也属于递归
-        def quicklypow(x, n):  #定义分治后的函数
-            #终止条件
-            if n == 0:return 1
-            if n == 1:return x
-            #定义分治后的乘积
-            y = quicklypow(x, n//2)
-            if n % 2 == 0:
-                return y * y
-            else:
-                return y * y * x
+	class Solution:
+    		def myPow(self, x: float, n: int) -> float:
+        		#分治，其实也属于递归
+        		def quicklypow(x, n):  #定义分治后的函数
+            		#终止条件
+            			if n == 0:return 1
+            			if n == 1:return x
+            			#定义分治后的乘积
+            			y = quicklypow(x, n//2)
+            			if n % 2 == 0:
+                			return y * y
+            			else:
+               				return y * y * x
         
-        if n < 0:
-            return 1/self.myPow(x, -n)
-        return quicklypow(x, n)
+        		if n < 0:
+            			return 1/self.myPow(x, -n)
+        		return quicklypow(x, n)
 
 
 
@@ -407,8 +407,6 @@ AVL总结
 从任一结点到其每个叶子的所有路径都包含相同数目的黑色结点
 
 
-'/tmp/UvZsMxzWF34z2SAt[0].png!thumbnail'
-
 
 关键性质：高度差小于两倍——从根到叶子的最长的可能路径不多于最短的可能路径的两倍长。
 
@@ -424,12 +422,143 @@ node.（AVL更多的内存（int存放高度），红黑树，一个bit，额外
 
 • Red Black Trees are used in most of the language libraries like map,multimap,multisetin C++whereas AVL trees are used in databases（数据库） where faster retrievals are required.（读操作多，AVl，插入多，红黑树，map，set（红黑树），DB，读多，看朋友圈，AVL）
 
-'/tmp/GBWYav5jzmL6UEWe.png!thumbnail'
+
+第六周
+
+
+布隆过滤器和LRU Cache
+
+布隆过滤器
+
+HashTable + 拉链存储重复元素
+
+Bloom Filter vs Hash Table
+
+一个很长的二进制向量和一系列随机映射函数。布隆过滤器可以用于检索一个元素是否在一个集合中。
+
+
+优点是空间效率和查询时间都远远超过一般的算法，
+
+缺点是有一定的误识率和删除困难。
+
+
+
+只要有一个二进制位不为1，则不存在，但都是1，不一定就在里面。放在最外面，当缓存使用的。
+
+案例：
+
+1 比特币网络
+
+2 分布式系统（Map-Reduce）——Hadoop、search engine
+
+3 Redis缓存
+
+4 垃圾邮件、评论等的过滤
+
+
+LRU Cache
+
+Cache缓存
+
+1 记忆
+
+2 钱包-储物柜
+
+3 代码模块
+
+LRU Cache
+
+两个要素：大小、替换策略least recently used(最少最近被使用的元素）
+
+Hash Table + Double LinkedList
+
+O(1)查询
+
+O(1)修改、更新
+
+
+
+	class LRUCache:
+
+    		def __init__(self, capacity: int):
+        		#结合了哈希表与双向链表的数据结构OrderedDict
+        		self.dic = collections.OrderedDict()
+        		self.remain = capacity
+
+    		def get(self, key: int) -> int:
+        		if key not in self.dic:
+            			return -1
+        		v = self.dic.pop(key)
+        		self.dic[key] = v  #key as the newest one
+       			return v
+
+    		def put(self, key: int, value: int) -> None:
+        		if key in self.dic:
+            			self.dic.pop(key)
+        		else:
+            			if self.remain > 0:
+                			self.remain -= 1
+            		else:
+                		self.dic.popitem(last = False)
+        		self.dic[key] = value
+
+	# Your LRUCache object will be instantiated and called as such:
+	# obj = LRUCache(capacity)
+	# param_1 = obj.get(key)
+	# obj.put(key,value)
 
 
 
 
+排序算法
 
+初级排序和高级排序的实现和特性
+
+1 比较类排序：时间复杂度不能突破O（nlogn），因此也称为非线性时间比较类排序
+
+2 非比较类排序：对于整型相关的数据类型，线性时间，辅助额外内存空间
+
+快速排序（Quick Sort）
+
+数组取标杆pivot，将小元素放在pivot左边，大元素放右边，然后依次对右边和右边的子数组继续快排；以达到整个序列有序。
+
+
+归并排序（Merge Sort）
+
+“快排的逆向操作”
+
+归并排序（Merge Sort） —— 分治
+
+1 把长度为n的输入序列分成两个长度为n/2的子序列；
+
+2 对这两个子序列分别采用归并排序；
+
+3 将两个排序好的子序列合并成一个最终的排序序列。
+
+
+
+
+堆排序（Heap Sort）
+
+1 数组元素依次建立小顶堆
+
+2 依次取堆顶元素，并删除
+
+特殊排序O(n)
+
+计数排序
+
+桶排序
+
+基数排序
+
+
+
+第七周 不懂知识点回顾
+
+1  第3周 分治回溯中的 实战题目：电话号码的字母组合、N皇后
+
+2  第5周 高级搜索未学
 
 
 
